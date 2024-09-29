@@ -33,20 +33,34 @@ def read_root():
 
 @app.get("/data/")
 def get_data(timerange: str):
-    data = deepcopy(fakeData)
-    print(data)
-
     match timerange:
         case "Hour":
-            target_format = "%H:%M:%S"
+            target_format = "%H:%M"
+            query = queries.hourly_query
+        case "Day":
+            target_format = "%H"
+            query = queries.daily_query
         case _:
             target_format = DATETIME_DEFAULT_FORMAT
+            query = ""
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+
+    result = []
 
     id_iterator = 0
     for data_item in data:
-        data_item["id"] = id_iterator
-        data_item["timestmp"] = datetime.strptime(data_item["timestmp"], DATETIME_DEFAULT_FORMAT).strftime(target_format)
+        result_item = {
+            "id": id_iterator,
+            "timestmp": data_item[0].strftime(target_format),
+            "temperature": data_item[2]
+        }
 
-    return data
+        result.append(result_item)
+        id_iterator += 1
 
-conn.close()
+        # data_item["id"] = id_iterator
+        # data_item["timestmp"] = datetime.strptime(data_item["timestmp"], DATETIME_DEFAULT_FORMAT).strftime(target_format)
+
+    return result
