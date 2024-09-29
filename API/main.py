@@ -8,13 +8,6 @@ from queries import queries
 
 app = FastAPI()
 
-conn = psycopg.connect(dbname="sensordata",
-                       host="85.215.48.7",
-                       user="postgres",
-                       password="admin123",
-                       port="5432")
-cursor = conn.cursor()
-
 fakeData = [
     {"timestmp": "2024-09-27 17:51:00", "temperature": 22},
     {"timestmp": "2024-09-27 17:51:10", "temperature": 22},
@@ -33,6 +26,13 @@ def read_root():
 
 @app.get("/data/")
 def get_data(timerange: str):
+    conn = psycopg.connect(dbname="sensordata",
+                       host="85.215.48.7",
+                       user="postgres",
+                       password="admin123",
+                       port="5432")
+    cursor = conn.cursor()
+
     match timerange:
         case "Hour":
             target_format = "%H:%M"
@@ -47,6 +47,8 @@ def get_data(timerange: str):
     cursor.execute(query)
     data = cursor.fetchall()
 
+    print(data)
+
     result = []
 
     id_iterator = 0
@@ -54,7 +56,7 @@ def get_data(timerange: str):
         result_item = {
             "id": id_iterator,
             "timestmp": data_item[0].strftime(target_format),
-            "temperature": data_item[2]
+            "temperature": round(data_item[2], 2)
         }
 
         result.append(result_item)
