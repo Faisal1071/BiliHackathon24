@@ -14,3 +14,16 @@ The project provided valuable experience in connecting hardware with software, d
 ## Problem Definition
 
 ![Problem Definition](./DIY/5WHProblemDefnition.jpg)
+
+## Empathize and Define
+
+![Problem Tree](./EmpathizeAndDefine/ProblemTree.png)
+![UX Empathy Map Template](./EmpathizeAndDefine/UXEmpathyMapTemplate.png)
+
+## Ideate
+
+![635](./Ideate/6-3-5.pdf)
+
+## Business Model Canvas
+
+![Business Model Canvas](./BusinessModelCanvas.jpg)
