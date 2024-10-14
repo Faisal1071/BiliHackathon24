@@ -53,3 +53,11 @@ The harvest is being lost due to frost, inaccurate weather data, and competition
 ## Business Model Canvas
 
 ![Business Model Canvas](./BusinessModelCanvas.jpg)
+
+## Overview of technical solution
+
+### Use Case Diagram
+![Use case Diagram](./Diagrams/useCaseDiagram.png)
+
+### Activity Diagram
+![Activity Diagram](./Diagrams/activityDiagram.png)
